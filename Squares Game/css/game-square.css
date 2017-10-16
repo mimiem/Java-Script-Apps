@@ -1,0 +1,72 @@
+.game-square {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+.game-square > div {
+    width: 100%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    transition: 400ms;
+}
+.game-square > div > div {
+    height: 50%;
+}
+.game-square > div > div:first-child {
+    background-color: gray;
+}
+.flip > div {
+    top: -100%;
+}
+.square-0 {
+    background-color: #67dae0;
+}
+
+.square-1 {
+    background-color: #ef9bce;
+}
+
+.square-2 {
+    background-color: #4b83dd;
+}
+
+.square-3 {
+    background-color: #c94de2;
+}
+
+.square-4 {
+    background-color: #d63e33;
+}
+
+.square-5 {
+    background-color: #3f4a60;
+}
+
+.square-6 {
+    background-color: #3ab753;
+}
+
+.square-7 {
+    background-color: #f78502;
+}
+
+.square-8 {
+    background-color: coral;
+}
+
+.square-9 {
+    background-color: #387735;
+}
+
+#game {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid red;
+}
