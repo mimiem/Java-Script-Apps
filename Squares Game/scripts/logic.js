@@ -1,17 +1,17 @@
 $(()=> {
     timer.start();
+    let colors = [];
+    let gameSquares = [];
+    let firstSquare = null;
     let turnsCount = 0;
+    let winMessageDiv = $("#win-message");
+
     $("#reset-button").click(()=>{
-        $("#win-message").css('display', 'none');
         timer.stop();
         turnsCount = 0;
         setTurns();
         clearGame();
     });
-
-    let colors = [];
-    let gameSquares = [];
-    let firstSquare = null;
 
     for (let i = 0; i < 10; i++) {
         colors.push('square-' + i);
@@ -72,11 +72,11 @@ $(()=> {
     }
 
     function getSomeColors() {
-        let colorscopy = colors.slice();
+        let colorsCopy = colors.slice();
         let randomColors = [];
         for (let i = 0; i < 8; i++) {
-            let index = random(colorscopy.length);
-            randomColors.push(colorscopy.splice(index, 1)[0]);
+            let index = random(colorsCopy.length);
+            randomColors.push(colorsCopy.splice(index, 1)[0]);
         }
         return randomColors.concat(randomColors.slice());
     }
@@ -93,7 +93,7 @@ $(()=> {
             firstSquare.lock();
             gameSquare.lock();
             if(checkIfGameEnd()){
-                $("#win-message").css('display', 'block');
+                winMessageDiv.css('display', 'block');
                 timer.stop();
             }
         } else {
@@ -115,6 +115,7 @@ $(()=> {
 
     function checkIfGameEnd() {
         let isEnd = false;
+
         for(let i = 0; i < gameSquares.length; i++) {
             let square = gameSquares[i];
             if (square.isLocked === true && square.isOpen === true) {
@@ -144,6 +145,7 @@ $(()=> {
         setTimeout(function () {
             randomizeColors();
         }, 500);
+        winMessageDiv.css('display', 'none');
     }
 
     setupGame();
