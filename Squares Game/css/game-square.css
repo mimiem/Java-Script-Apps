@@ -99,3 +99,17 @@
     background-color: #378e36;
     color: white;
 }
+
+#win-message{
+    display: none;
+    font-size: 16px;
+    padding: 12px 30px;
+    margin: 10px 135px;
+}
+
+#timer {
+    font-size: 16px;
+    padding: 12px 30px;
+    margin: 10px 135px;
+
+}

@@ -3,9 +3,15 @@
     <head>
         <title>Game</title>
         <link rel="stylesheet" type="text/css" href="css/game-square.css" />
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+                integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+                crossorigin="anonymous"></script>
     </head>
     <body>
         <div class='container'>
+            <div id="win-message" class="message">
+                YOU WIN!
+            </div>
             <div id='game'>
                 <!-- Game Ssquares -->
                 <div class='game-square'>
@@ -105,10 +111,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 text-center">
-                <button id='reset-button'>Reset</button>
+            <div id="controls">
+                <div id="timer" class="col-md-4 text-center">
+                    <span id="hours" class="timer">00</span> :
+                    <span id="minutes" class="timer">00</span> :
+                    <span id="seconds" class="timer">00</span>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button id='reset-button'>Reset</button>
+                </div>
+
             </div>
         </div>
-    <script src="scripts/logic.js"></script>
-  </body>
+        <script src="scripts/logic.js"></script>
+        <script src="scripts/timer.js"></script>
+    </body>
 </html>
