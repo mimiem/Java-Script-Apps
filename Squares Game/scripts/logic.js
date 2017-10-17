@@ -1,10 +1,11 @@
 $(()=> {
-    timer.start();
+
     let colors = [];
     let gameSquares = [];
     let firstSquare = null;
     let turnsCount = 0;
     let winMessageDiv = $("#win-message");
+    let numberOfRandomColorPairs = 0;
 
     $("#reset-button").click(()=>{
         timer.stop();
@@ -13,7 +14,30 @@ $(()=> {
         clearGame();
     });
 
-    for (let i = 0; i < 10; i++) {
+    $('#difficulty').change(()=>{
+        setupDifficulty();
+        setupGame();
+    });
+
+    function multiplyNode(count, deep) {
+        $("#game").empty();
+        let gameSquareDiv = document.createElement('div');
+        gameSquareDiv.setAttribute('class', 'game-square');
+        let innerDiv = document.createElement('div');
+        innerDiv.appendChild(document.createElement('div'));
+        innerDiv.appendChild(document.createElement('div'));
+        gameSquareDiv.appendChild(innerDiv);
+        $("#game").append(gameSquareDiv);
+
+        let node = document.querySelector('.game-square');
+        for (let i = 0, copy; i < count - 1; i++) {
+            copy = node.cloneNode(deep);
+            node.parentNode.insertBefore(copy, node);
+        }
+    }
+
+
+    for (let i = 0; i < 18; i++) {
         colors.push('square-' + i);
     }
 
@@ -55,6 +79,27 @@ $(()=> {
         this.el.children[0].children[1].classList.add(color);
     };
 
+    function setupDifficulty() {
+        let difficulty = $('#difficulty').find(":selected").text();
+
+        if(difficulty === 'Normal'){
+            numberOfRandomColorPairs = 8;
+            multiplyNode(16, true);
+            $("#game").css("width", "400px");
+            $("#game").css("height", "400px");
+
+        } else {
+            numberOfRandomColorPairs = 18;
+            multiplyNode(36, true);
+            $("#game").css("width", "600px");
+            $("#game").css("height", "600px");
+        }
+
+        $("#game").css("display", "flex");
+        $("#controls").css("display", "block");
+
+        timer.start();
+    }
 
     function setupGame() {
         let array = document.getElementsByClassName("game-square");
@@ -74,7 +119,7 @@ $(()=> {
     function getSomeColors() {
         let colorsCopy = colors.slice();
         let randomColors = [];
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < numberOfRandomColorPairs; i++) {
             let index = random(colorsCopy.length);
             randomColors.push(colorsCopy.splice(index, 1)[0]);
         }
@@ -148,5 +193,4 @@ $(()=> {
         winMessageDiv.css('display', 'none');
     }
 
-    setupGame();
 });

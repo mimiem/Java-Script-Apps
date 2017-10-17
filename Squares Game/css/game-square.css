@@ -64,10 +64,42 @@
     background-color: #387735;
 }
 
+.square-10 {
+    background-color: #cbcfd6;
+}
+
+.square-11 {
+    background-color: #5b2b26;
+}
+
+.square-12 {
+    background-color: #995a54;
+}
+
+.square-13 {
+    background-color: #f25907;
+}
+
+.square-14 {
+    background-color: #fcf805;
+}
+
+.square-15 {
+    background-color: #51f704;
+}
+
+.square-16 {
+    background-color: #f704f3;
+}
+
+.square-17 {
+    background-color: #ff1d00;
+}
+
 #game {
-    width: 400px;
-    height: 400px;
-    display: flex;
+    width: 600px;
+    height: 600px;
+    display: none;
     flex-direction: row;
     flex-wrap: wrap;
     border: 3px solid #b7b9bc;
@@ -75,7 +107,7 @@
 }
 
 #reset-button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 12px 30px;
@@ -117,4 +149,8 @@
     font-size: 16px;
     padding: 12px 30px;
     margin: 10px 135px;
+}
+
+#controls {
+    display: none;
 }
