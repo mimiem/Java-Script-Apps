@@ -17,7 +17,6 @@ let timer = (()=>{
 
     function start() {
         time = setInterval(step, 1000);
-        console.log(seconds);
         outputTime(seconds);
     }
 

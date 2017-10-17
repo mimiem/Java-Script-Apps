@@ -1,9 +1,11 @@
 $(()=> {
     timer.start();
+    let turnsCount = 0;
     $("#reset-button").click(()=>{
-        console.log('reset');
         $("#win-message").css('display', 'none');
         timer.stop();
+        turnsCount = 0;
+        setTurns();
         clearGame();
     });
 
@@ -80,6 +82,8 @@ $(()=> {
     }
 
     function checkGame(gameSquare) {
+        turnsCount++;
+        setTurns();
         if (firstSquare === null) {
             firstSquare = gameSquare;
             return
@@ -103,6 +107,10 @@ $(()=> {
         }
 
         firstSquare = null;
+    }
+
+    function setTurns() {
+        $("#turns").text("Turns: " + turnsCount);
     }
 
     function checkIfGameEnd() {
