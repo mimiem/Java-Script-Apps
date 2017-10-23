@@ -7,14 +7,13 @@ $(()=> {
     let winMessageDiv = $("#win-message");
     let numberOfRandomColorPairs = 0;
 
-    $("#reset-button").click(()=>{
-        timer.stop();
-        turnsCount = 0;
-        setTurns();
+    $("#reset-button").click(()=>{ //todo sometimes squares are empty
+        newGame();
         clearGame();
     });
 
     $('#difficulty').change(()=>{
+        newGame();
         setupDifficulty();
         setupGame();
     });
@@ -55,6 +54,7 @@ $(()=> {
                 if (this.isOpen || this.isLocked) {
                     return;
                 }
+
                 this.isOpen = true;
                 this.el.classList.add('flip');
                 checkGame(this);
@@ -98,7 +98,6 @@ $(()=> {
         $("#game").css("display", "flex");
         $("#controls").css("display", "block");
 
-        timer.start();
     }
 
     function setupGame() {
@@ -137,9 +136,10 @@ $(()=> {
         if (firstSquare.color === gameSquare.color) {
             firstSquare.lock();
             gameSquare.lock();
-            if(checkIfGameEnd()){
-                winMessageDiv.css('display', 'block');
-                timer.stop();
+            if(checkIfGameEnd){
+                //TODO problem with win message
+                //winMessageDiv.css('display', 'block');
+                //timer.stop();
             }
         } else {
             let a = firstSquare;
@@ -159,19 +159,22 @@ $(()=> {
     }
 
     function checkIfGameEnd() {
-        let isEnd = false;
+        let isEnd;
 
-        for(let i = 0; i < gameSquares.length; i++) {
+        for (let i = 0; i < gameSquares.length; i++) {
             let square = gameSquares[i];
-            if (square.isLocked === true && square.isOpen === true) {
-                isEnd = true;
-            }else if (square.isLocked === false || square.isOpen === false){
-                isEnd = false;
-                return isEnd;
-            }
-        }
 
+            if(square.isOpen === true && square.isLocked === true){
+                isEnd = true;
+            }
+
+            if (square.isOpen === false || (square.isOpen === false && square.isLocked === false)){
+                return false;
+            }
+
+        }
         return isEnd;
+
     }
 
     function randomizeColors() {
@@ -186,11 +189,16 @@ $(()=> {
         gameSquares.forEach(function (gameSquare) {
             gameSquare.reset();
         });
-        timer.start();
         setTimeout(function () {
             randomizeColors();
         }, 500);
         winMessageDiv.css('display', 'none');
     }
 
+    function newGame() {
+        timer.stop();
+        timer.start();
+        turnsCount = 0;
+        setTurns();
+    }
 });
